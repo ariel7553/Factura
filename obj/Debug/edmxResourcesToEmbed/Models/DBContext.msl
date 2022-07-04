@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FacturacionModelStoreContainer" CdmEntityContainer="FacturacionEntities">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="FacturacionModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="Cliente_Id" ColumnName="Cliente_Id" />
+          <ScalarProperty Name="Ced_Ruc_Cliente" ColumnName="Ced_Ruc_Cliente" />
+          <ScalarProperty Name="Nombre_Cliente" ColumnName="Nombre_Cliente" />
+          <ScalarProperty Name="Apellido_Cliente" ColumnName="Apellido_Cliente" />
+          <ScalarProperty Name="Telefono_Cliente" ColumnName="Telefono_Cliente" />
+          <ScalarProperty Name="Direccion_Cliente" ColumnName="Direccion_Cliente" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Detalle">
+      <EntityTypeMapping TypeName="FacturacionModel.Detalle">
+        <MappingFragment StoreEntitySet="Detalle">
+          <ScalarProperty Name="Id_DetFac" ColumnName="Id_DetFac" />
+          <ScalarProperty Name="Id_Prod" ColumnName="Id_Prod" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Id_Fac" ColumnName="Id_Fac" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factura">
+      <EntityTypeMapping TypeName="FacturacionModel.Factura">
+        <MappingFragment StoreEntitySet="Factura">
+          <ScalarProperty Name="Id_Fact" ColumnName="Id_Fact" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="Iva" ColumnName="Iva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="FacturacionModel.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="Producto_Id" ColumnName="Producto_Id" />
+          <ScalarProperty Name="Producto1" ColumnName="Producto" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

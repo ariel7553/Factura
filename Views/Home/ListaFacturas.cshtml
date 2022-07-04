@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Lista Facturas";
+}
+
+<h2>Listado de Facturas</h2>
+
+<div class="app-card app-card-orders-table shadow-sm mb-5">
+    <div class="app-card-body">
+        <div class="table-responsive">
+            <table id="tablaFacturas" class="table app-table-hover mb-0 text-left">
+                <thead>
+                    <tr>
+                        <th class="cell">#</th>
+                        <th class="cell">ID</th>
+                        <th class="cell">Fecha</th>
+                        <th class="cell">Cliente</th>
+
+                        <th class="cell">Subtotal</th>
+                        <th class="cell">IVA</th>
+                        <th class="cell">Total</th>
+                        <th class="cell"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="cell"># 15346</td>
+                        <td class="cell">John Sanders</td>
+                        <td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
+                        <td class="cell">$ 00.00</td>
+                        <td class="cell">$ 00.00</td>
+                        <td class="cell">$ 00.00</td>
+                        <td class="cell"><button class="btn-sm app-btn-secondary">Ver</button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div><!--//table-responsive-->
+
+    </div><!--//app-card-body-->
+</div><!--//app-card-->
+
+<script type="text/javascript">
+    var tablaFactura = $('#tablaFacturas').DataTable({
+        ordering: false,
+        searching: false,
+        lengthChange: false,
+        info: false,
+        paging: false,
+        data: [],
+        columnDefs: [
+
+            { "data": "Num", targets: 0, visible: false },
+            { "data": "Id_Fact", targets: 1, visible: false },
+            { "data": "Fecha", targets: 2 },
+            { "data": "Cliente", targets: 3 },
+            { "data": "Subtotal", targets: 4 },
+            { "data": "Iva", targets: 5 },
+            { "data": "Total", targets: 6 },
+            {
+                "data": null, targets: 7, render: function (data) {
+                    return ` <button id="Ver" class="btn-sm app-btn-secondary">Ver</button> `;
+                }
+            },
+
+
+        ]
+    });
+
+
+    $(document).ready(function () {
+
+        $.ajax({
+            async: false,
+            url: "@Url.Content("~/Home/ListadoFacturas")",
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                if (data.Mensaje != null ) {
+                    AlertaMensaje("Error", data.Mensaje, "error");
+                } else {
+                    tablaFactura.clear().draw();
+                    tablaFactura.rows.add(data.Info).draw();
+                }
+            },
+            error: function (err) {
+                AlertaMensaje("Error", "Error al Cargar Productos", "error");
+            }
+        });
+
+
+        $("#tablaFacturas tbody").on("click", "button", function () {
+            let Origen = $(this).attr("id");
+            switch (Origen) {
+                case "Ver": {
+                    let Datos = tablaFactura.row($(this).parents("tr")).data();
+                    console.log(Datos)
+                    var url = "@Url.Action("VerFactura", "Home", new { idFact = "__idFact__" }  )";
+
+
+                    url = url.replace("__idFact__", Datos.Id_Fact);
+                    window.location.href = url;
+                }
+
+            }
+        });
+
+    });
+
+</script>
